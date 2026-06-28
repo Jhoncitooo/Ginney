@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Invitación Especial ✨</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Floating Hearts Canvas / Container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Music Player (Optional & Float) -->
+    <button class="music-toggle" id="musicToggle" aria-label="Toggle Music">
+        <i class="fas fa-music"></i>
+    </button>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Invitation Card -->
+        <div class="card" id="invitationCard">
+            <div class="card-header">
+                <span class="badge">Para: Ginney ✨</span>
+            </div>
+            
+            <div class="card-body">
+                <div class="cute-avatar-container">
+                    <div class="heart-pulse-glow">
+                        <i class="fas fa-heart main-heart-icon"></i>
+                    </div>
+                </div>
+                
+                <h1 class="title">¿Te gustaría salir conmigo?</h1>
+                <p class="subtitle">He estado pensando en que sería increíble pasar un rato juntos...</p>
+                
+                <!-- Date details Card -->
+                <div class="details-card">
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="detail-text">
+                            <span class="label">Cuándo</span>
+                            <span class="value">Este Jueves</span>
+                        </div>
+                    </div>
+                    <div class="detail-divider"></div>
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="detail-text">
+                            <span class="label">Hora</span>
+                            <span class="value">9:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Buttons -->
+                <div class="buttons-container">
+                    <button class="btn btn-yes" id="btnYes">
+                        <i class="fas fa-check"></i> ¡Sí, me encantaría!
+                    </button>
+                    <button class="btn btn-no" id="btnNo">
+                        No, gracias <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Card (Hidden by Default) -->
+        <div class="card success-card hidden" id="successCard">
+            <div class="confetti-container" id="confettiContainer"></div>
+            <div class="card-body success-body">
+                <div class="celebration-animation">
+                    <div class="emoji-bounce">🥰</div>
+                    <i class="fas fa-heart success-heart-icon"></i>
+                </div>
+                <h1 class="success-title">¡Siiii! 🎉</h1>
+                <p class="success-message">¡Me haces muy feliz! Ya quiero que sea jueves.</p>
+                
+                <div class="appointment-summary">
+                    <h3>Nuestra Cita 💖</h3>
+                    <p><i class="fas fa-calendar-day icon-accent"></i> Jueves por la noche</p>
+                    <p><i class="fas fa-clock icon-accent"></i> 9:00 PM</p>
+                    <p class="summary-note">¡Paso por ti a las 9! Te aseguro que la pasaremos genial. ✨</p>
+                </div>
+                
+                <div class="pulse-ring"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
