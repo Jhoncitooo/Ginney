@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const heartsContainer = document.getElementById("heartsContainer");
+    const particlesContainer = document.getElementById("particlesContainer");
     const musicToggle = document.getElementById("musicToggle");
     const bgMusic = document.getElementById("bgMusic");
     const btnYes = document.getElementById("btnYes");
@@ -8,40 +8,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const successCard = document.getElementById("successCard");
     const confettiContainer = document.getElementById("confettiContainer");
 
-    // 1. Create Floating Hearts Background
-    const createHeart = () => {
-        const heart = document.createElement("i");
-        heart.classList.add("fas", "fa-heart", "heart-particle");
+    // 1. Create Floating Bokeh/Bubbles Background (Beautiful but not too romantic)
+    const createBubble = () => {
+        const bubble = document.createElement("div");
+        bubble.classList.add("bubble-particle");
         
         // Random style details
-        const size = Math.random() * 20 + 10; // 10px to 30px
+        const size = Math.random() * 40 + 15; // 15px to 55px
         const left = Math.random() * 100; // 0% to 100%
-        const duration = Math.random() * 4 + 4; // 4s to 8s
-        const delay = Math.random() * 2;
+        const duration = Math.random() * 6 + 6; // 6s to 12s
+        const delay = Math.random() * 3;
         
-        heart.style.fontSize = `${size}px`;
-        heart.style.left = `${left}%`;
-        heart.style.animationDuration = `${duration}s`;
-        heart.style.animationDelay = `${delay}s`;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${left}%`;
+        bubble.style.animationDuration = `${duration}s`;
+        bubble.style.animationDelay = `${delay}s`;
         
-        // Random opacity & color tint
-        const hue = Math.random() * 30 + 340; // Pink shades (340 to 10)
-        heart.style.color = `hsl(${hue}, 100%, 75%)`;
-        heart.style.opacity = Math.random() * 0.5 + 0.3;
-
-        heartsContainer.appendChild(heart);
+        // Random pastel colors for orbs
+        const colors = [
+            "rgba(255, 107, 139, 0.15)", // Soft Pink
+            "rgba(139, 108, 255, 0.15)", // Soft Lavender
+            "rgba(72, 219, 251, 0.15)",  // Soft Cyan
+            "rgba(255, 238, 242, 0.2)",  // Pale rose
+            "rgba(255, 255, 255, 0.35)"   // White orb
+        ];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        bubble.style.background = `radial-gradient(circle, ${randomColor} 0%, rgba(255,255,255,0) 70%)`;
+        
+        particlesContainer.appendChild(bubble);
 
         // Remove element after animation completes
         setTimeout(() => {
-            heart.remove();
+            bubble.remove();
         }, (duration + delay) * 1000);
     };
 
-    // Generate initial hearts and start loop
+    // Generate initial bubbles and start loop
     for (let i = 0; i < 15; i++) {
-        setTimeout(createHeart, Math.random() * 3000);
+        setTimeout(createBubble, Math.random() * 3000);
     }
-    setInterval(createHeart, 800);
+    setInterval(createBubble, 1000);
 
     // 2. Play/Pause Background Music
     let isPlaying = false;
@@ -63,27 +70,30 @@ document.addEventListener("DOMContentLoaded", () => {
         isPlaying = !isPlaying;
     };
 
-    // 3. Dodge Game for "No" Button
+    // 3. Dodge Game for "No" Button (Restricted to Card Bounds so it doesn't get lost)
     const dodgeButton = () => {
-        // Change position style to fixed to allow positioning anywhere in viewport
-        btnNo.style.position = "fixed";
-        btnNo.style.zIndex = "999";
+        // Change position style to absolute relative to invitationCard
+        btnNo.style.position = "absolute";
+        btnNo.style.zIndex = "99";
 
+        const cardWidth = invitationCard.offsetWidth;
+        const cardHeight = invitationCard.offsetHeight;
         const btnWidth = btnNo.offsetWidth;
         const btnHeight = btnNo.offsetHeight;
         
-        // Calculate safe boundaries
-        const maxX = window.innerWidth - btnWidth - 20;
-        const maxY = window.innerHeight - btnHeight - 20;
+        // Calculate safe boundaries within the card
+        const padding = 20;
+        const maxX = cardWidth - btnWidth - padding;
+        const maxY = cardHeight - btnHeight - padding;
         
-        let newX = Math.random() * maxX;
-        let newY = Math.random() * maxY;
+        let newX = Math.random() * (maxX - padding) + padding;
+        let newY = Math.random() * (maxY - padding) + padding;
 
-        // Make sure it doesn't position at negative space
-        newX = Math.max(10, newX);
-        newY = Math.max(10, newY);
+        // Ensure it doesn't position at negative space
+        newX = Math.max(padding, newX);
+        newY = Math.max(padding, newY);
 
-        // Update positions
+        // Update positions relative to the card
         btnNo.style.left = `${newX}px`;
         btnNo.style.top = `${newY}px`;
     };
